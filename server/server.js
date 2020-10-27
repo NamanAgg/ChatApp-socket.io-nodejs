@@ -10,6 +10,7 @@ const path=require("path");
 const app = express();
 const socketIO=require("socket.io");
 
+const generateMessage=require(__dirname+"/utils/message.js")
 const port=process.env.PORT|| 3000;
 
 
@@ -27,25 +28,14 @@ app.get("/",function(req,res){
 io.on('connection',function(socket){
   console.log("A new user just got connected");
 
-  socket.emit("newMessage",{
-    from:"Admin",
-    text:"Welcome to Chat App",
-    createdAt: new Date().getTime()
-  });
+  socket.emit("newMessage",generateMessage("Admin","Welcome to Chat App"));
 
-  socket.broadcast.emit('newMessage',{
-    from:"Admin",
-    text:"A new user has just connected",
-    createdAt:new Date().getTime()
-  });
+  socket.broadcast.emit('newMessage',generateMessage("Admin","A new user has just connected"));
 
-  socket.on("createMessage",function(message){
+  socket.on("createMessage",function(message,callback){
     console.log("create Message ",message);//here we can also have done console.log("create Message"+ message); but the one we have done is better
-    io.emit("newMessage",{
-      from:message.from,
-      text:message.text,
-      createdAt: new Date().getTime()
-    });
+    io.emit("newMessage",generateMessage(message.from,message.text));
+    callback("this is your server speaking.");
   });
   socket.on("disconnect",function(){
     console.log("User was disconnected");

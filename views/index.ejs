@@ -23,7 +23,15 @@
     socket.on("newMessage",function(message){
       console.log("new Message",message);
     });
+
+    socket.emit("createMessage",{
+      from:"xyz",
+      text:"hey"
+    }, function(mess){
+      console.log(mess,"the message is delivered to server");
+    });
     </script>
+
 
 
 
