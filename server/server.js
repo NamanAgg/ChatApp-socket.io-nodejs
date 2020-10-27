@@ -24,10 +24,30 @@ app.get("/",function(req,res){
   res.render("index");
 });
 
-io.on('connection',(socket)=>{
+io.on('connection',function(socket){
   console.log("A new user just got connected");
 
-  socket.on("disconnect",()=>{
+  socket.emit("newMessage",{
+    from:"Admin",
+    text:"Welcome to Chat App",
+    createdAt: new Date().getTime()
+  });
+
+  socket.broadcast.emit('newMessage',{
+    from:"Admin",
+    text:"A new user has just connected",
+    createdAt:new Date().getTime()
+  });
+
+  socket.on("createMessage",function(message){
+    console.log("create Message ",message);//here we can also have done console.log("create Message"+ message); but the one we have done is better
+    io.emit("newMessage",{
+      from:message.from,
+      text:message.text,
+      createdAt: new Date().getTime()
+    });
+  });
+  socket.on("disconnect",function(){
     console.log("User was disconnected");
   });
 });
