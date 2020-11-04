@@ -6,31 +6,28 @@
   </head>
   <body>
     <h1>hello world</h1>
+<form id="message-form">
+  <input type="text" name="message" palceholder="message">
+  <button type="button" id="msg-btn">Submit</button>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     <script src="/socket.io/socket.io.js" ></script>
-    <script type="text/javascript">
-    let socket=io();
+    <%- include('partials/ind.ejs'); %>
 
-
-    socket.on('connect',function(){
-      console.log('connected to server');
-    });
-    socket.on('disconnect',function(){
-      console.log('disconnected from server');
-    });
-
-    socket.on("newMessage",function(message){
-      console.log("new Message",message);
-    });
-
-    socket.emit("createMessage",{
-      from:"xyz",
-      text:"hey"
-    }, function(mess){
-      console.log(mess,"the message is delivered to server");
-    });
-    </script>
 
 
 

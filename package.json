@@ -1,7 +1,7 @@
 {
-  "name": "pdfroom",
+  "name": "chatapp",
   "version": "1.0.0",
-  "description": "a web app where you can store pdf in one place",
+  "description": "a web app for chatting.",
   "main": "index.js",
   "scripts": {
     "start": "node server/server.js",
@@ -20,6 +20,7 @@
     "express": "^4.17.1",
     "lodash": "^4.17.20",
     "mocha": "^8.2.0",
+    "moment": "^2.29.1",
     "mongoose": "^5.10.10",
     "socket.io": "^2.3.0"
   }

@@ -1,4 +1,3 @@
-<script type="text/javascript">
 let socket=io();
 
 function scrollToBottom() { //function so that when any new message is received the app automatically goes down to show that message
@@ -72,7 +71,7 @@ socket.on("newLocationMessage", function(message) {
 });
 
 
-document.querySelector("#msg-btn").addEventListener('click',function(event){
+document.querySelector("#submit-btn").addEventListener('click',function(event){
   event.preventDefault();
 
 
@@ -101,4 +100,3 @@ document.querySelector("#send-location").addEventListener("click", function(e) {
     alert("Unable to fetch location.")
   });
 });
-</script>
